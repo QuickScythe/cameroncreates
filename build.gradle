@@ -1,0 +1,66 @@
+plugins {
+    id "java"
+    id "org.springframework.boot" version "$spring_boot_version"
+    id "io.spring.dependency-management" version "$spring_dep_version"
+}
+
+group = "org.cameroncreates"
+version = "$project_version-$build_status.$build_number"
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+
+    maven {
+        url "https://maven.pkg.github.com/Quipt-Minecraft/quipt"
+        credentials {
+            username = "QuickScythe"
+            password = System.getenv("QUIPT_ACCESS_TOKEN")
+        }
+    }
+}
+
+bootJar {
+    mainClass = "${group}.Main"
+}
+
+dependencies {
+    testImplementation platform("org.junit:junit-bom:$junit_version")
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation "ch.qos.logback:logback-core:$logback_version"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+
+    implementation "org.springframework.boot:spring-boot-starter-thymeleaf"
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-tomcat"
+    implementation "org.json:json:$json_version"
+    implementation "com.quiptmc:core:$quipt_version"
+//    implementation "com.github.Quipt-Minecraft.quipt:core:f6896143fc"
+    implementation "com.zaxxer:HikariCP:$hikari_version"
+    implementation "mysql:mysql-connector-java:8.0.33"
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+def targetJavaVersion = Integer.parseInt(java_version)
+java {
+    withSourcesJar()
+    withJavadocJar()
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
