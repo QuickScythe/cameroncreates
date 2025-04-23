@@ -15,7 +15,7 @@ repositories {
         url "https://maven.pkg.github.com/Quipt-Minecraft/quipt"
         credentials {
             username = "QuickScythe"
-            password = System.getenv("QUIPT_ACCESS_TOKEN")
+            password = "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"
         }
     }
 }
