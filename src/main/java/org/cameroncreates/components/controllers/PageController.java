@@ -17,7 +17,7 @@ public class PageController {
         return "Redirect here. (post)";
     }
 
-    @PostMapping("/guild-rush-webhook-get")
+    @GetMapping("/guild-rush-webhook-get")
     public String redirectGet() {
         return "Redirect here. (get)";
     }
