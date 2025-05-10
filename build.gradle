@@ -21,7 +21,7 @@ repositories {
 }
 
 bootJar {
-    mainClass = "${group}.Main"
+    mainClass = "org.cameroncreates.Main"
 }
 
 dependencies {
