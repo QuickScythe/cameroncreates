@@ -10,18 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Locale;
 
-@RestController
+@Controller
 public class PageController {
 
-    @PostMapping("/guild-rush-webhook-post")
+    @PostMapping("/guild-rush-webhook")
     public String redirectPost() {
         return "Redirect here. (post)";
     }
 
-    @GetMapping("/guild-rush-webhook-get")
-    public String redirectGet() {
-        return "Redirect here. (get)";
-    }
 
 
 
