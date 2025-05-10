@@ -1,6 +1,9 @@
 package org.cameroncreates;
 
 import com.quiptmc.core.QuiptIntegration;
+import com.quiptmc.core.config.Config;
+import com.quiptmc.core.config.ConfigManager;
+import org.cameroncreates.config.TestConfig;
 import org.cameroncreates.utils.Utils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,6 +28,10 @@ public class Main extends SpringBootServletInitializer {
         @Override
         public void enable() {
             if (!dataFolder().exists()) dataFolder().mkdirs();
+
+            TestConfig config = ConfigManager.registerConfig(this, TestConfig.class);
+            config.testString = "test2";
+            config.save();
         }
 
         @Override

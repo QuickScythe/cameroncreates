@@ -15,7 +15,7 @@ repositories {
         url "https://maven.pkg.github.com/Quipt-Minecraft/quipt"
         credentials {
             username = "QuickScythe"
-            password = "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"
+            password = System.getenv("PACKAGES_TOKEN")
         }
     }
 }
@@ -34,10 +34,12 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web"
     implementation "org.springframework.boot:spring-boot-starter-tomcat"
     implementation "org.json:json:$json_version"
-    implementation "com.quiptmc:core:$quipt_version"
+//    implementation "com.quiptmc:core:$quipt_version"
+    implementation "com.github.Quipt-Minecraft.quipt:core:f6896143fc"
 //    implementation "com.github.Quipt-Minecraft.quipt:core:f6896143fc"
     implementation "com.zaxxer:HikariCP:$hikari_version"
     implementation "mysql:mysql-connector-java:8.0.33"
+
 
 }
 
