@@ -44,7 +44,7 @@ public class GuildRushController {
             return new Feedback(Feedback.Result.SUCCESS, "Goal amount: " + goal).json();
         }
         if(action.equalsIgnoreCase("last")){
-            return new Feedback(Feedback.Result.SUCCESS, "Last event: " + lastEvent.json()).json();
+            return new Feedback(Feedback.Result.SUCCESS, "Last event: " + (lastEvent == null ? "No last event in memory." : lastEvent.json())).json();
         }
 
         return new Feedback(Feedback.Result.FAILURE, "Unknown action: " + action).json();
